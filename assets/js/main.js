@@ -171,7 +171,7 @@ const generate = () => {
 
     delete_result_axios += `
   const deleteUser = (${params_1}) => {
-    axios.delete("${url_value}"/${params_1},{
+    axios.delete("${url_value}/${params_1}",{
             headers: {
                 authorization: "${token_value}"
             }
