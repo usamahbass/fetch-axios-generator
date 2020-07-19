@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="icon" href="assets/favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Fetch-Axios-Generator</title>
+  </head>
+  <body>
+    <main>
+        <div class="container-fluid pt-3">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <div class="card dark h-22 mb-5">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="url_value" class="form-label">URL</label>
+                                <input type="email" class="form-control" id="url_value" placeholder="https://api.example.com" required>
+                                <div class="invalid-feedback" id="feedback">
+                                    Please choose a valid url.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="token_value" class="form-label">Your Token</label>
+                                <input type="text" class="form-control mb-2" id="token_value" placeholder="12345678" >
+                            </div>
+                            <div class="mb-3">
+                                <label for="params_1" class="form-label">Value</label>
+                                <input type="text" class="form-control" id="params_1" placeholder="Params 1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="params_2 class="form-label">Value</label>
+                                <input type="text" class="form-control" id="params_2" placeholder="Params 2">
+                            </div>   
+                            <div class="mb-3">
+                                <label for="params_3" class="form-label">Value</label>
+                                <input type="text" class="form-control" id="params_3" placeholder="Params 3">
+                            </div>                                       
+                            <div class="row mt-3">
+                                <div class="col-md-7">
+                                </div>
+                                <div class="col-md-5 text-right">
+                                    <button type="button" id="generate" onclick="generate()" class="btn btn-danger">Generate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card dark h-10 mb-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result For GET Method
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('get')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_get"></code></pre>
+                            <textarea id="clipboard_get" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+                    <div class="card dark h-10 mb-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result For GET Method with Axios
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('get_axios')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_get_axios"></code></pre>
+                            <textarea id="clipboard_get_axios" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+                    <div class="card h-33 dark mb-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result POST Method
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('post')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_post"></code></pre>
+                            <textarea id="clipboard_post" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card h-33 dark">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result POST Method with Axios
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('post_axios')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_post_axios"></code></pre>
+                            <textarea id="clipboard_post_axios" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-33 dark mb-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result PUT Method
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('put')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_put"></code></pre>
+                            <textarea id="clipboard_put" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card h-33 dark mb-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result PUT Method with Axios
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('put_axios')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_put_axios"></code></pre>
+                            <textarea id="clipboard_put_axios" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card h-33 dark mb-5">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result DELETE Method
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('delete')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_delete"></code></pre>
+                            <textarea id="clipboard_delete" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="card h-33 dark">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <p class="font-weight-bold">
+                                        Result DELETE Method with Axios
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <span onclick="copyClipboard('delete_axios')" class="badge bg-danger">Copy Code</span>
+                                </div>
+                            </div>
+                            <pre><code id="result_delete_axios"></code></pre>
+                            <textarea id="clipboard_delete_axios" style="opacity: 0;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="assets/js/main.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js'></script>
+    
+  </body>
+</html>
