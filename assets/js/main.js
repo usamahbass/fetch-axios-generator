@@ -33,9 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const generate = () => {
   const url_value = document.getElementById("url_value").value;
   const token_value = document.getElementById("token_value").value;
-  const params_1 = document.getElementById("params_1").value;
-  const params_2 = document.getElementById("params_2").value;
-  const params_3 = document.getElementById("params_3").value;
+  const params_id = document.getElementById("params_id").value;
+  const params = document.getElementById("params").value.split(",");
 
   let get_result = "";
   let get_result_axios = "";
@@ -50,115 +49,115 @@ const generate = () => {
     Swal.fire("Oopss..", `Please Fill In The Required Fields`, "error");
   } else {
     get_result += `
-  const fetchData = () => {
-    fetch("${url_value}", {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Auth-Token": "${token_value}"
-      }
-    })
-      .then((response) => {
-        return response.json();
+    const fetchData = () => {
+      fetch("${url_value}", {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth-Token": "${token_value}"
+        }
       })
-      .then((responseJSON) => console.log(responseJSON))
-      .catch((err) => console.error(err));
-  };
+        .then((response) => {
+          return response.json();
+        })
+        .then((responseJSON) => console.log(responseJSON))
+        .catch((err) => console.error(err));
+    };
   `;
 
     get_result_axios += `
-  const fetchData = () => {
-    axios.get("${url_value}",{
-        headers: {
-            authorization: "${token_value}"
-        }
-    }).then(response => {
-            console.log(response);
-      })
-      .catch(err => console.error(err));
-  };
+    const fetchData = () => {
+      axios.get("${url_value}",{
+          headers: {
+              authorization: "${token_value}"
+          }
+      }).then(response => {
+              console.log(response);
+        })
+        .catch(err => console.error(err));
+    };
   `;
 
     post_result += `
-  const body = {
-    params1: "${params_1}",
-    params2: "${params_2}",
-    params3: "${params_3}"
-  }
+    const body = {
+      ${params.map((items, i) => {
+        return `params${i + 1}: "${items}"`;
+      })}
+    }
 
-  const createUser = (body) => {
-    fetch("${url_value}", {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Auth-Token": "${token_value}"
-      },
-      method: "POST",
-      body: JSON.stringify(body),
-    })
-    .then((response) => {
-      return response.json()
-    })
-    .then((responseJSON) => console.log(responseJSON))
-    .catch((error) => console.log(error));
-  };
-  `;
+    const createUser = (body) => {
+      fetch("${url_value}", {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth-Token": "${token_value}"
+        },
+        method: "POST",
+        body: JSON.stringify(body),
+      })
+      .then((response) => {
+        return response.json()
+      })
+      .then((responseJSON) => console.log(responseJSON))
+      .catch((error) => console.log(error));
+    };
+    `;
 
     post_result_axios += `
-  const body = {
-    params1: "${params_1}",
-    params2: "${params_2}",
-    params3: "${params_3}"
-  }
-  const createUser = (body) => {
-    axios.post('${url_value}', body ,{
-            headers: {
-                authorization: '${token_value}'
-            }
-        })
-        .then((response) => console.log(response))
-        .catch(error => console.error(error));
-  };
+    const body = {
+      ${params.map((items, i) => {
+        return `params${i + 1}: "${items}"`;
+      })}
+    }
+    const createUser = (body) => {
+      axios.post('${url_value}', body ,{
+              headers: {
+                  authorization: '${token_value}'
+              }
+          })
+          .then((response) => console.log(response))
+          .catch(error => console.error(error));
+    };
   `;
 
     put_result += `
-  const body = {
-    params1: "${params_1}",
-    params2: "${params_2}",
-    params3: "${params_3}"
-  }
-  const updateUser = (body) => {
-    fetch("${url_value}", {
-      headers: {
-        "Content-Type": "application/json",
-        "X-Auth-Token": "${token_value}",
-      },
-      method: "PUT",
-      body: JSON.stringify(body),
-    })
-    .then((response) => console.log(response))
-    .catch(error => console.error(error));
-  };
+    const body = {
+      ${params.map((items, i) => {
+        return `params${i + 1}: "${items}"`;
+      })}
+    }
+    const updateUser = (body) => {
+      fetch("${url_value}", {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Auth-Token": "${token_value}",
+        },
+        method: "PUT",
+        body: JSON.stringify(body),
+      })
+      .then((response) => console.log(response))
+      .catch(error => console.error(error));
+    };
   `;
 
     put_result_axios += `
-  const body = {
-    params1: "${params_1}",
-    params2: "${params_2}",
-    params3: "${params_3}"
-  }
-  const updateUser = (body) => {
-    axios.put('${url_value}', body,{
-            headers: {
-                authorization: '${token_value}'
-            }
-        })
-        .then(response => console.log(response))
-        .catch(error => console.error(error));
-  };
+     const body = {
+      ${params.map((items, i) => {
+        return `params${i + 1}: "${items}"`;
+      })}
+    }
+    const updateUser = (body) => {
+      axios.put('${url_value}', body,{
+              headers: {
+                  authorization: '${token_value}'
+              }
+          })
+          .then(response => console.log(response))
+          .catch(error => console.error(error));
+    };
   `;
 
     delete_result += `
-  const deleteUser = (${params_1}) => {
-    fetch("${url_value}/${params_1}", {
+  const deleteUser = (${params_id}) => {
+    fetch("${url_value}/${params_id}", {
       headers: {
         "X-Auth-Token": "${token_value}",
       },
@@ -170,8 +169,8 @@ const generate = () => {
   `;
 
     delete_result_axios += `
-  const deleteUser = (${params_1}) => {
-    axios.delete("${url_value}/${params_1}",{
+  const deleteUser = (${params_id}) => {
+    axios.delete("${url_value}/${params_id}",{
             headers: {
                 authorization: "${token_value}"
             }

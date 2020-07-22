@@ -63,6 +63,15 @@ pre code {
   background: #08061f !important;
 }
 
+.card.card-input {
+  height: 500px;
+}
+
+.card-body.card-input-body {
+  height: 100%;
+  overflow: auto;
+}
+
 .form-control:focus {
   box-shadow: 0 0 0 0.2rem #ff8a00;
 }
